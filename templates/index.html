@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>E Commerce Clone</title>
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500&family=Work+Sans:wght@300;500&display=swap"
+            rel="stylesheet"
+        />
+        <!-- Link Swiper's CSS -->
+        <link
+            rel="stylesheet"
+            href="https://unpkg.com/swiper/swiper-bundle.min.css"
+        />
+        {% load static %}
+        <style>
+            :root {
+                --color-primary-a: darksalmon;
+                --color-primary-b: #f3f3f3;
+                /*  */
+                --unit-a: calc(1rem + 0.5vw);
+                --unit-b: calc(1rem + 1vw);
+            }
+
+            * {
+                box-sizing: border-box;
+                padding: 0;
+                margin: 0;
+            }
+
+            button {
+                background: none;
+                outline: none;
+                cursor: pointer;
+            }
+
+            button {
+                border: transparent;
+                outline: none;
+                box-shadow: none;
+            }
+
+            a {
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+            .font-chilanka {
+                font-family: 'WorkSans', sans-serif;
+                font-weight: normal;
+                font-style: normal;
+            }
+
+            .font-montserrat {
+                font-family: 'Montserrat', sans-serif;
+                font-weight: normal;
+                font-style: normal;
+            }
+
+            .overflow-hidden {
+                overflow: hidden;
+            }
+
+            .overflow-y-auto {
+                overflow-y: auto;
+            }
+
+            .width100vw-height100vh {
+                width: 100vw;
+                height: 100vh;
+            }
+            .width100 {
+                width: 100%;
+            }
+
+            .width80 {
+                width: 80%;
+            }
+
+            .width-max-content {
+                width: max-content;
+            }
+
+            .min-height100 {
+                min-height: 100%;
+            }
+
+            .height100 {
+                height: 100%;
+            }
+
+            .display-flex {
+                display: flex;
+            }
+
+            .display-flex-center {
+                justify-content: center;
+                align-items: center;
+            }
+
+            .display-flex-row-wrap {
+                flex-flow: row wrap;
+            }
+
+            .display-flex-column {
+                flex-flow: column;
+            }
+
+            .display-flex-hr {
+                justify-content: space-evenly;
+            }
+
+            .display-flex-hr-ends {
+                justify-content: space-between;
+            }
+
+            .display-flex-hr-around {
+                justify-content: space-around;
+            }
+
+            .display-flex-align-self-start {
+                align-self: flex-start;
+            }
+
+            .position-relative {
+                position: relative;
+            }
+
+            .position-fixed {
+                position: fixed;
+            }
+
+            .position-sticky {
+                position: -webkit-sticky;
+                position: sticky;
+                top: 0;
+            }
+
+            .position-absolute {
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+
+            .position-center {
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            .z-index1 {
+                z-index: 1;
+            }
+
+            .z-index-minus1 {
+                z-index: -1;
+            }
+
+            .padding5 {
+                padding: 5%;
+            }
+
+            .padding10 {
+                padding: 10%;
+            }
+            .margin-a {
+                margin: calc(var(--unit-a) * 1);
+            }
+
+            .font-size-1 {
+                font-size: calc(var(--unit-a) * 3.4);
+                line-height: calc(var(--unit-a) * 4);
+            }
+
+            .font-size-2 {
+                font-size: calc(var(--unit-a) * 2);
+            }
+
+            .font-size-3 {
+                font-size: calc(var(--unit-a) * 1);
+                line-height: calc(var(--unit-a) * 2);
+            }
+
+            .font-size-4 {
+                font-size: calc(var(--unit-a) * 0.8);
+            }
+
+            .font-size-5 {
+                font-size: calc(var(--unit-a) * 0.6);
+            }
+
+            .font-weight-light {
+                font-weight: 300;
+            }
+
+            .font-weight-medium {
+                font-weight: 300;
+            }
+
+            .font-weight-heavy {
+                font-weight: 600;
+            }
+
+            .text-center {
+                text-align: center;
+            }
+
+            .background-color-a {
+                background-color: var(--color-primary-a);
+            }
+
+            .background-color-b {
+                background-color: var(--color-primary-b);
+            }
+
+            .border-radius-a {
+                border-radius: calc(var(--unit-a) * 1);
+            }
+
+            .shadow-a {
+                box-shadow: calc(var(--unit-a) * 0.5) calc(var(--unit-a) * 0.5)
+                    calc(var(--unit-a) * 1) #ddd;
+            }
+
+            .header {
+                flex-flow: column;
+            }
+
+            .logo {
+                width: calc(var(--unit-a) * 2);
+            }
+            .cart-icon {
+                width: calc(var(--unit-a) * 1.5);
+                height: calc(var(--unit-a) * 1.5);
+            }
+            .swiper {
+                width: 100%;
+                height: calc(var(--unit-a) * 15);
+            }
+
+            .swiper-slide {
+                text-align: center;
+                font-size: 18px;
+                background: #fff;
+
+                /* Center slide text vertically */
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: -webkit-flex;
+                display: flex;
+                -webkit-box-pack: center;
+                -ms-flex-pack: center;
+                -webkit-justify-content: center;
+                justify-content: center;
+                -webkit-box-align: center;
+                -ms-flex-align: center;
+                -webkit-align-items: center;
+                align-items: center;
+            }
+
+            .swiper-slide img {
+                display: block;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .all-poem-card {
+                width: calc(var(--unit-a) * 13);
+                height: calc(var(--unit-a) * 14);
+                margin: calc(var(--unit-a) * 1) calc(var(--unit-a) * 2);
+            }
+            .card {
+                width: calc(var(--unit-a) * 9);
+            }
+            .card > img {
+                height: calc(var(--unit-a) * 7);
+                object-fit: cover;
+            }
+            @media screen and (min-width: 600px) {
+                .header {
+                    flex-flow: row;
+                }
+            }
+        </style>
+    </head>
+    <body class="width100vw-height100vh overflow-hidden overflow-y-auto">
+        <header
+            class="header display-flex display-flex-hr-ends background-color-a"
+        >
+            <div class="header-child">
+                <img
+                    class="logo margin-a"
+                    src="{% static 'logo/a.png' %}"
+                    alt="logo"
+                />
+            </div>
+            <div class="header-child display-flex">
+                <p class="font-size-3 font-montserrat margin-a">MEN</p>
+                <p class="font-size-3 font-montserrat margin-a">WOMEN</p>
+                <p class="font-size-3 font-montserrat margin-a">KIDS</p>
+            </div>
+            <div class="header-right display-flex">
+                <p class="font-size-3 font-montserrat margin-a">Login</p>
+                <div
+                    class="
+                        icon-wrapper
+                        display-flex display-flex-center display-flex-column
+                        margin-a
+                    "
+                >
+                    <svg
+                        class="cart-icon"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="#000000"
+                    >
+                        <path d="M0 0h24v24H0V0z" fill="none" />
+                        <path
+                            d="M19 6h-2c0-2.76-2.24-5-5-5S7 3.24 7 6H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-7-3c1.66 0 3 1.34 3 3H9c0-1.66 1.34-3 3-3zm7 17H5V8h14v12zm-7-8c-1.66 0-3-1.34-3-3H7c0 2.76 2.24 5 5 5s5-2.24 5-5h-2c0 1.66-1.34 3-3 3z"
+                        />
+                    </svg>
+                    <p class="font-size-5 font-montserrat">Cart</p>
+                </div>
+            </div>
+        </header>
+        <main>
+            <br />
+            <br />
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img
+                            src="{% static 'images/lawn_man.jpg' %}"
+                            alt="slide"
+                            srcset=""
+                        />
+                    </div>
+                    <div class="swiper-slide">
+                        <img
+                            src="{% static 'images/lawn_man.jpg' %}"
+                            alt="slide"
+                            srcset=""
+                        />
+                    </div>
+                    <div class="swiper-slide">
+                        <img
+                            src="{% static 'images/lawn_man.jpg' %}"
+                            alt="slide"
+                            srcset=""
+                        />
+                    </div>
+                    <div class="swiper-slide">
+                        <img
+                            src="{% static 'images/lawn_man.jpg' %}"
+                            alt="slide"
+                            srcset=""
+                        />
+                    </div>
+                    <div class="swiper-slide">
+                        <img
+                            src="{% static 'images/lawn_man.jpg' %}"
+                            alt="slide"
+                            srcset=""
+                        />
+                    </div>
+                    <div class="swiper-slide">
+                        <img
+                            src="{% static 'images/lawn_man.jpg' %}"
+                            alt="slide"
+                            srcset=""
+                        />
+                    </div>
+                    <div class="swiper-slide">
+                        <img
+                            src="{% static 'images/lawn_man.jpg' %}"
+                            alt="slide"
+                            srcset=""
+                        />
+                    </div>
+                    <div class="swiper-slide">
+                        <img
+                            src="{% static 'images/lawn_man.jpg' %}"
+                            alt="slide"
+                            srcset=""
+                        />
+                    </div>
+                    <div class="swiper-slide">
+                        <img
+                            src="{% static 'images/lawn_man.jpg' %}"
+                            alt="slide"
+                            srcset=""
+                        />
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+            <br />
+            <div class="segment-wrapper">
+                <p class="heading font-size-2 font-montserrat margin-a">
+                    Deals of the Day
+                </p>
+                <div
+                    class="
+                        card-wrapper
+                        width100
+                        display-flex display-flex-center display-flex-row-wrap
+                    "
+                >
+                    <div
+                        class="
+                            card
+                            border-radius-a
+                            shadow-a
+                            margin-a
+                            background-color-b
+                            overflow-hidden
+                        "
+                    >
+                        <img
+                            class="width100"
+                            src="{% static 'images/lawn_man.jpg' %}"
+                            alt="crad-iamge"
+                        />
+                        <p class="font-size-4 font-montserrat margin-a">
+                            Brand Name
+                        </p>
+                        <p class="font-size-5 font-montserrat margin-a">
+                            Brand tagline
+                        </p>
+                    </div>
+                    <div
+                        class="
+                            card
+                            border-radius-a
+                            shadow-a
+                            margin-a
+                            background-color-b
+                            overflow-hidden
+                        "
+                    >
+                        <img
+                            class="width100"
+                            src="{% static 'images/lawn_man.jpg' %}"
+                            alt="crad-iamge"
+                        />
+                        <p class="font-size-4 font-montserrat margin-a">
+                            Brand Name
+                        </p>
+                        <p class="font-size-5 font-montserrat margin-a">
+                            Brand tagline
+                        </p>
+                    </div>
+                    <div
+                        class="
+                            card
+                            border-radius-a
+                            shadow-a
+                            margin-a
+                            background-color-b
+                            overflow-hidden
+                        "
+                    >
+                        <img
+                            class="width100"
+                            src="{% static 'images/lawn_man.jpg' %}"
+                            alt="crad-iamge"
+                        />
+                        <p class="font-size-4 font-montserrat margin-a">
+                            Brand Name
+                        </p>
+                        <p class="font-size-5 font-montserrat margin-a">
+                            Brand tagline
+                        </p>
+                    </div>
+                    <div
+                        class="
+                            card
+                            border-radius-a
+                            shadow-a
+                            margin-a
+                            background-color-b
+                            overflow-hidden
+                        "
+                    >
+                        <img
+                            class="width100"
+                            src="{% static 'images/lawn_man.jpg' %}"
+                            alt="crad-iamge"
+                        />
+                        <p class="font-size-4 font-montserrat margin-a">
+                            Brand Name
+                        </p>
+                        <p class="font-size-5 font-montserrat margin-a">
+                            Brand tagline
+                        </p>
+                    </div>
+                    <div
+                        class="
+                            card
+                            border-radius-a
+                            shadow-a
+                            margin-a
+                            background-color-b
+                            overflow-hidden
+                        "
+                    >
+                        <img
+                            class="width100"
+                            src="{% static 'images/lawn_man.jpg' %}"
+                            alt="crad-iamge"
+                        />
+                        <p class="font-size-4 font-montserrat margin-a">
+                            Brand Name
+                        </p>
+                        <p class="font-size-5 font-montserrat margin-a">
+                            Brand tagline
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="segment-wrapper">
+                <p class="heading font-size-2 font-montserrat margin-a">
+                    Deals of the Day
+                </p>
+                <div
+                    class="
+                        card-wrapper
+                        width100
+                        display-flex display-flex-center display-flex-row-wrap
+                    "
+                >
+                    <div
+                        class="
+                            card
+                            border-radius-a
+                            shadow-a
+                            margin-a
+                            background-color-b
+                            overflow-hidden
+                        "
+                    >
+                        <img
+                            class="width100"
+                            src="{% static 'images/lawn_man.jpg' %}"
+                            alt="crad-iamge"
+                        />
+                        <p class="font-size-4 font-montserrat margin-a">
+                            Brand Name
+                        </p>
+                        <p class="font-size-5 font-montserrat margin-a">
+                            Brand tagline
+                        </p>
+                    </div>
+                    <div
+                        class="
+                            card
+                            border-radius-a
+                            shadow-a
+                            margin-a
+                            background-color-b
+                            overflow-hidden
+                        "
+                    >
+                        <img
+                            class="width100"
+                            src="{% static 'images/lawn_man.jpg' %}"
+                            alt="crad-iamge"
+                        />
+                        <p class="font-size-4 font-montserrat margin-a">
+                            Brand Name
+                        </p>
+                        <p class="font-size-5 font-montserrat margin-a">
+                            Brand tagline
+                        </p>
+                    </div>
+                    <div
+                        class="
+                            card
+                            border-radius-a
+                            shadow-a
+                            margin-a
+                            background-color-b
+                            overflow-hidden
+                        "
+                    >
+                        <img
+                            class="width100"
+                            src="{% static 'images/lawn_man.jpg' %}"
+                            alt="crad-iamge"
+                        />
+                        <p class="font-size-4 font-montserrat margin-a">
+                            Brand Name
+                        </p>
+                        <p class="font-size-5 font-montserrat margin-a">
+                            Brand tagline
+                        </p>
+                    </div>
+                    <div
+                        class="
+                            card
+                            border-radius-a
+                            shadow-a
+                            margin-a
+                            background-color-b
+                            overflow-hidden
+                        "
+                    >
+                        <img
+                            class="width100"
+                            src="{% static 'images/lawn_man.jpg' %}"
+                            alt="crad-iamge"
+                        />
+                        <p class="font-size-4 font-montserrat margin-a">
+                            Brand Name
+                        </p>
+                        <p class="font-size-5 font-montserrat margin-a">
+                            Brand tagline
+                        </p>
+                    </div>
+                    <div
+                        class="
+                            card
+                            border-radius-a
+                            shadow-a
+                            margin-a
+                            background-color-b
+                            overflow-hidden
+                        "
+                    >
+                        <img
+                            class="width100"
+                            src="{% static 'images/lawn_man.jpg' %}"
+                            alt="crad-iamge"
+                        />
+                        <p class="font-size-4 font-montserrat margin-a">
+                            Brand Name
+                        </p>
+                        <p class="font-size-5 font-montserrat margin-a">
+                            Brand tagline
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="segment-wrapper">
+                <p class="heading font-size-2 font-montserrat margin-a">
+                    Deals of the Day
+                </p>
+                <div
+                    class="
+                        card-wrapper
+                        width100
+                        display-flex display-flex-center display-flex-row-wrap
+                    "
+                >
+                    <div
+                        class="
+                            card
+                            border-radius-a
+                            shadow-a
+                            margin-a
+                            background-color-b
+                            overflow-hidden
+                        "
+                    >
+                        <img
+                            class="width100"
+                            src="{% static 'images/lawn_man.jpg' %}"
+                            alt="crad-iamge"
+                        />
+                        <p class="font-size-4 font-montserrat margin-a">
+                            Brand Name
+                        </p>
+                        <p class="font-size-5 font-montserrat margin-a">
+                            Brand tagline
+                        </p>
+                    </div>
+                    <div
+                        class="
+                            card
+                            border-radius-a
+                            shadow-a
+                            margin-a
+                            background-color-b
+                            overflow-hidden
+                        "
+                    >
+                        <img
+                            class="width100"
+                            src="{% static 'images/lawn_man.jpg' %}"
+                            alt="crad-iamge"
+                        />
+                        <p class="font-size-4 font-montserrat margin-a">
+                            Brand Name
+                        </p>
+                        <p class="font-size-5 font-montserrat margin-a">
+                            Brand tagline
+                        </p>
+                    </div>
+                    <div
+                        class="
+                            card
+                            border-radius-a
+                            shadow-a
+                            margin-a
+                            background-color-b
+                            overflow-hidden
+                        "
+                    >
+                        <img
+                            class="width100"
+                            src="{% static 'images/lawn_man.jpg' %}"
+                            alt="crad-iamge"
+                        />
+                        <p class="font-size-4 font-montserrat margin-a">
+                            Brand Name
+                        </p>
+                        <p class="font-size-5 font-montserrat margin-a">
+                            Brand tagline
+                        </p>
+                    </div>
+                    <div
+                        class="
+                            card
+                            border-radius-a
+                            shadow-a
+                            margin-a
+                            background-color-b
+                            overflow-hidden
+                        "
+                    >
+                        <img
+                            class="width100"
+                            src="{% static 'images/lawn_man.jpg' %}"
+                            alt="crad-iamge"
+                        />
+                        <p class="font-size-4 font-montserrat margin-a">
+                            Brand Name
+                        </p>
+                        <p class="font-size-5 font-montserrat margin-a">
+                            Brand tagline
+                        </p>
+                    </div>
+                    <div
+                        class="
+                            card
+                            border-radius-a
+                            shadow-a
+                            margin-a
+                            background-color-b
+                            overflow-hidden
+                        "
+                    >
+                        <img
+                            class="width100"
+                            src="{% static 'images/lawn_man.jpg' %}"
+                            alt="crad-iamge"
+                        />
+                        <p class="font-size-4 font-montserrat margin-a">
+                            Brand Name
+                        </p>
+                        <p class="font-size-5 font-montserrat margin-a">
+                            Brand tagline
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="segment-wrapper">
+                <p class="heading font-size-2 font-montserrat margin-a">
+                    Deals of the Day
+                </p>
+                <div
+                    class="
+                        card-wrapper
+                        width100
+                        display-flex display-flex-center display-flex-row-wrap
+                    "
+                >
+                    <div
+                        class="
+                            card
+                            border-radius-a
+                            shadow-a
+                            margin-a
+                            background-color-b
+                            overflow-hidden
+                        "
+                    >
+                        <img
+                            class="width100"
+                            src="{% static 'images/lawn_man.jpg' %}"
+                            alt="crad-iamge"
+                        />
+                        <p class="font-size-4 font-montserrat margin-a">
+                            Brand Name
+                        </p>
+                        <p class="font-size-5 font-montserrat margin-a">
+                            Brand tagline
+                        </p>
+                    </div>
+                    <div
+                        class="
+                            card
+                            border-radius-a
+                            shadow-a
+                            margin-a
+                            background-color-b
+                            overflow-hidden
+                        "
+                    >
+                        <img
+                            class="width100"
+                            src="{% static 'images/lawn_man.jpg' %}"
+                            alt="crad-iamge"
+                        />
+                        <p class="font-size-4 font-montserrat margin-a">
+                            Brand Name
+                        </p>
+                        <p class="font-size-5 font-montserrat margin-a">
+                            Brand tagline
+                        </p>
+                    </div>
+                    <div
+                        class="
+                            card
+                            border-radius-a
+                            shadow-a
+                            margin-a
+                            background-color-b
+                            overflow-hidden
+                        "
+                    >
+                        <img
+                            class="width100"
+                            src="{% static 'images/lawn_man.jpg' %}"
+                            alt="crad-iamge"
+                        />
+                        <p class="font-size-4 font-montserrat margin-a">
+                            Brand Name
+                        </p>
+                        <p class="font-size-5 font-montserrat margin-a">
+                            Brand tagline
+                        </p>
+                    </div>
+                    <div
+                        class="
+                            card
+                            border-radius-a
+                            shadow-a
+                            margin-a
+                            background-color-b
+                            overflow-hidden
+                        "
+                    >
+                        <img
+                            class="width100"
+                            src="{% static 'images/lawn_man.jpg' %}"
+                            alt="crad-iamge"
+                        />
+                        <p class="font-size-4 font-montserrat margin-a">
+                            Brand Name
+                        </p>
+                        <p class="font-size-5 font-montserrat margin-a">
+                            Brand tagline
+                        </p>
+                    </div>
+                    <div
+                        class="
+                            card
+                            border-radius-a
+                            shadow-a
+                            margin-a
+                            background-color-b
+                            overflow-hidden
+                        "
+                    >
+                        <img
+                            class="width100"
+                            src="{% static 'images/lawn_man.jpg' %}"
+                            alt="crad-iamge"
+                        />
+                        <p class="font-size-4 font-montserrat margin-a">
+                            Brand Name
+                        </p>
+                        <p class="font-size-5 font-montserrat margin-a">
+                            Brand tagline
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <br />
+            <br />
+        </main>
+        <footer class="display-flex display-flex-center background-color-a">
+            <br />
+            <p class="font-size-3 font-montserrat margin-a">&copy A 2021</p>
+            <br />
+        </footer>
+        <!-- Swiper JS -->
+        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+        <!-- Initialize Swiper -->
+        <script>
+            var swiper = new Swiper('.mySwiper', {
+                pagination: {
+                    el: '.swiper-pagination',
+                },
+                autoplay: {
+                    delay: 5000,
+                },
+            });
+        </script>
+    </body>
+</html>
